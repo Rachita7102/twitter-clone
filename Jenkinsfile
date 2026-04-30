@@ -11,12 +11,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                if(isUnix()) {
-                    sh 'mvn clean install'
-                }
-                else {
-                sh 'mvn clean install'
-                }
+                if (isUnix()) { sh 'mvn clean install' }
+                else { bat 'mvn clean install' }
             }
         }
 
