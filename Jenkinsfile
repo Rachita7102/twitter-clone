@@ -23,7 +23,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                     if (isUnix()) {
+                          sh 'mvn test'
+                     } else {
+                          bat 'mvn test'
+                     }
+                }
             }
         }
     }
