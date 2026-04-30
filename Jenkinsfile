@@ -11,10 +11,12 @@ pipeline {
 
         stage('Build') {
             steps {
-            if(isUnix()) {
+                if(isUnix()) {
+                    sh 'mvn clean install'
+                }
+                else {
                 sh 'mvn clean install'
-            } else {
-                sh 'mvn clean install'
+                }
             }
         }
 
