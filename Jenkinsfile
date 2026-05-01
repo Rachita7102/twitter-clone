@@ -1,3 +1,5 @@
+pipeline {
+agent any
 stages {
 
     stage('Checkout') {
@@ -50,4 +52,5 @@ post {
     failure {
         echo 'Build Failed ❌'
     }
+}
 }
