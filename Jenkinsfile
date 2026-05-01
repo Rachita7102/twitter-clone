@@ -53,14 +53,26 @@ stages {
 
     stage('Build Docker Image') {
             steps {
-                 sh 'docker build -t twitter-app .'
-            }
+                        script {
+                            if (isUnix()) {
+                                sh 'docker build -t twitter-app .'
+                            } else {
+                                bat 'docker build -t twitter-app .'
+                            }
+                        }
+                    }
     }
 
     stage('Run Container') {
              steps {
-                 sh 'docker run -d -p 8081:8080 twitter-app'
-             }
+                         script {
+                             if (isUnix()) {
+                                  sh 'docker run -d -p 8081:8080 twitter-app'
+                             } else {
+                                  bat 'docker run -d -p 8081:8080 twitter-app'
+                             }
+                         }
+                     }
     }
 
 }
