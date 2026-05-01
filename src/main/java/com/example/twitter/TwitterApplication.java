@@ -8,7 +8,7 @@ public class TwitterApplication {
 
 	public static void main(String[] args) {
         System.out.println("Starting Twitter Application...");
-        System.out.println("Loading configuration...");
+        System.out.println("Loading configuration with jenkins...");
 		SpringApplication.run(TwitterApplication.class, args);
 	}
 
