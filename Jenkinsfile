@@ -67,11 +67,11 @@ stages {
                  steps {
                              script {
                                  if (isUnix()) {
-                                      sh 'docker stop twitter-app || exit 0'
-                                      sh 'docker rm twitter-app || exit 0'
+                                      sh 'docker stop $(docker ps -q)'
+                                      sh 'docker rm $(docker ps -aq)'
                                  } else {
-                                      bat 'docker stop twitter-app || exit 0'
-                                      bat 'docker rm twitter-app || exit 0'
+                                      bat 'docker stop $(docker ps -q)'
+                                      bat 'docker rm $(docker ps -aq)'
                                  }
                              }
                          }
