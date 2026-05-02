@@ -3,6 +3,8 @@ package com.example.twitter.service;
 import com.example.twitter.dao.*;
 import com.example.twitter.mapper.UserMapper;
 import com.example.twitter.repository.AuthRepository;
+import com.example.twitter.utils.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +12,8 @@ public class AuthService {
 
     private final UserMapper userMapper;
     private final AuthRepository authRepository;
+    @Autowired
+    private final JwtUtil jwtTokenUtil = new JwtUtil(); // For token generation
 
     public AuthService(UserMapper userMapper, AuthRepository authRepository) {
         this.userMapper = userMapper;
@@ -44,7 +48,7 @@ public class AuthService {
         }
 
         // Generate token (will implement later)
-        String token ="dummy-jwt-token";
+        String token =jwtTokenUtil.generateToken(user.getUsername());
 
         // Build response
         AuthResponse response = new AuthResponse();
