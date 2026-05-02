@@ -81,9 +81,9 @@ stages {
              steps {
                          script {
                              if (isUnix()) {
-                                  sh 'docker run -d -p 8081:8085 twitter-app'
+                                  sh 'docker run -d -p 8081:8080 twitter-app'
                              } else {
-                                  bat 'docker run -d -p 8081:8085 twitter-app'
+                                  bat 'docker run -d -p 8081:8080 twitter-app'
                              }
                          }
                      }
