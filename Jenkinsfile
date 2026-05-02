@@ -96,7 +96,7 @@ post {
         echo 'Build Successful 🎉'
     }
     failure {
-        echo 'Build Failed ❌'
+        echo 'Build Failed 💥'
     }
 }
 }
