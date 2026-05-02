@@ -67,11 +67,11 @@ stages {
                  steps {
                              script {
                                  if (isUnix()) {
-                                      sh 'docker stop $(docker ps -q)'
-                                      sh 'docker rm $(docker ps -aq)'
+                                      sh 'docker stop twitter-app || true'
+                                      sh 'docker rm twitter-app || true'
                                  } else {
-                                      bat 'docker stop $(docker ps -q)'
-                                      bat 'docker rm $(docker ps -aq)'
+                                      bat 'docker stop twitter-app || exit 0'
+                                      bat 'docker rm twitter-app || exit 0'
                                  }
                              }
                          }
@@ -81,9 +81,9 @@ stages {
              steps {
                          script {
                              if (isUnix()) {
-                                  sh 'docker run -d -p 8081:8085 twitter-app'
+                                  sh 'docker run -d --name twitter-app -p 8081:8085 twitter-app'
                              } else {
-                                  bat 'docker run -d -p 8081:8085 twitter-app'
+                                  bat 'docker run -d --name twitter-app -p 8081:8085 twitter-app'
                              }
                          }
                      }
