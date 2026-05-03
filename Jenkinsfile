@@ -54,20 +54,36 @@ stages {
             }
     }
 
+//     stage('Clean') {
+//         steps {
+//             script {
+//                 if (isUnix()) {
+//                     sh '''
+//                     docker-compose down -v --remove-orphans || true
+//                     docker rm -f postgres-db pgadmin || true
+//                     docker rm -f postgres-db twitter-app || true
+//                     '''
+//                 } else {
+//                     bat '''
+//                     docker-compose down -v --remove-orphans || exit 0
+//                     docker rm -f postgres-db pgadmin || exit 0
+//                     docker rm -f postgres-db twitter-app || exit 0
+//                     '''
+//                 }
+//             }
+//         }
+//     }
+
     stage('Clean') {
         steps {
             script {
                 if (isUnix()) {
                     sh '''
-                    docker-compose down -v --remove-orphans || true
-                    docker rm -f postgres-db pgadmin || true
-                    docker rm -f postgres-db twitter-app || true
+                    docker-compose down --remove-orphans || true
                     '''
                 } else {
                     bat '''
-                    docker-compose down -v --remove-orphans || exit 0
-                    docker rm -f postgres-db pgadmin || exit 0
-                    docker rm -f postgres-db twitter-app || exit 0
+                    docker-compose down --remove-orphans || exit 0
                     '''
                 }
             }
