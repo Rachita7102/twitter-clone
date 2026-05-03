@@ -61,11 +61,13 @@ stages {
                     sh '''
                     docker-compose down -v --remove-orphans || true
                     docker rm -f postgres-db pgadmin || true
+                    docker rm -f postgres-db twitter-app || true
                     '''
                 } else {
                     bat '''
                     docker-compose down -v --remove-orphans || exit 0
                     docker rm -f postgres-db pgadmin || exit 0
+                    docker rm -f postgres-db twitter-app || exit 0
                     '''
                 }
             }
@@ -85,43 +87,43 @@ stages {
                 }
         }
 
-    stage('Build Docker Image') {
-            steps {
-                        script {
-                            if (isUnix()) {
-                                sh 'docker build -t twitter-app .'
-                            } else {
-                                bat 'docker build -t twitter-app .'
-                            }
-                        }
-                    }
-    }
-
-    stage('Stop Old Container') {
-                 steps {
-                             script {
-                                 if (isUnix()) {
-                                      sh 'docker stop twitter-app || true'
-                                      sh 'docker rm twitter-app || true'
-                                 } else {
-                                      bat 'docker stop twitter-app || exit 0'
-                                      bat 'docker rm twitter-app || exit 0'
-                                 }
-                             }
-                         }
-        }
-
-    stage('Run Container') {
-             steps {
-                         script {
-                             if (isUnix()) {
-                                  sh 'docker run -d --name twitter-app -p 8081:8085 twitter-app'
-                             } else {
-                                  bat 'docker run -d --name twitter-app -p 8081:8085 twitter-app'
-                             }
-                         }
-                     }
-    }
+//     stage('Build Docker Image') {
+//             steps {
+//                         script {
+//                             if (isUnix()) {
+//                                 sh 'docker build -t twitter-app .'
+//                             } else {
+//                                 bat 'docker build -t twitter-app .'
+//                             }
+//                         }
+//                     }
+//     }
+//
+//     stage('Stop Old Container') {
+//                  steps {
+//                              script {
+//                                  if (isUnix()) {
+//                                       sh 'docker stop twitter-app || true'
+//                                       sh 'docker rm twitter-app || true'
+//                                  } else {
+//                                       bat 'docker stop twitter-app || exit 0'
+//                                       bat 'docker rm twitter-app || exit 0'
+//                                  }
+//                              }
+//                          }
+//         }
+//
+//     stage('Run Container') {
+//              steps {
+//                          script {
+//                              if (isUnix()) {
+//                                   sh 'docker run -d --name twitter-app -p 8081:8085 twitter-app'
+//                              } else {
+//                                   bat 'docker run -d --name twitter-app -p 8081:8085 twitter-app'
+//                              }
+//                          }
+//                      }
+//     }
 
 }
 
