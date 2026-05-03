@@ -56,6 +56,7 @@ stages {
 
     stage('Clean') {
                     steps {
+                    script {
                         if (isUnix()){
                             sh 'docker-compose down || true'
                         }
@@ -63,16 +64,19 @@ stages {
                             bat 'docker-compose down || exit 0'
                         }
                     }
+                    }
             }
 
     stage('Docker compose build') {
                 steps {
+                script {
                     if (isUnix()){
                         sh 'docker-compose up -d --build'
                     }
                     else {
                         bat 'docker-compose up -d --build'
                     }
+                }
                 }
         }
 
