@@ -31,7 +31,7 @@ services:
     depends_on:
       - postgres-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5430/twitter_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/twitter_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       JAVA_TOOL_OPTIONS: -Duser.timezone=UTC
