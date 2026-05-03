@@ -41,3 +41,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
       JAVA_TOOL_OPTIONS: -Duser.timezone=UTC
+
+volumes:
+  postgres_data:
+  pgadmin_data:
