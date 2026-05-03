@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: twitter_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5430:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: twitter-user@login.com
+      PGADMIN_DEFAULT_PASSWORD: secured
+    ports:
+      - "5051:80"
+    depends_on:
+      - postgres-db
+
+  app:
+    build: .
+    container_name: twitter-app
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5430/twitter_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JAVA_TOOL_OPTIONS: -Duser.timezone=UTC
