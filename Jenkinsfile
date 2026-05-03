@@ -56,7 +56,7 @@ stages {
 
     stage('Clean') {
                     steps {
-                        if (isUnix(){
+                        if (isUnix()){
                             sh 'docker-compose down || true'
                         }
                         else {
