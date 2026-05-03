@@ -55,17 +55,22 @@ stages {
     }
 
     stage('Clean') {
-                    steps {
-                    script {
-                        if (isUnix()){
-                            sh 'docker-compose down || true'
-                        }
-                        else {
-                            bat 'docker-compose down || exit 0'
-                        }
-                    }
-                    }
+        steps {
+            script {
+                if (isUnix()) {
+                    sh '''
+                    docker-compose down -v --remove-orphans || true
+                    docker rm -f postgres-db pgadmin || true
+                    '''
+                } else {
+                    bat '''
+                    docker-compose down -v --remove-orphans || exit 0
+                    docker rm -f postgres-db pgadmin || exit 0
+                    '''
+                }
             }
+        }
+    }
 
     stage('Docker compose build') {
                 steps {
