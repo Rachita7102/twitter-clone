@@ -54,6 +54,28 @@ stages {
             }
     }
 
+    stage('Clean') {
+                    steps {
+                        if (isUnix){
+                            sh 'docker-compose down || true'
+                        }
+                        else {
+                            bat 'docker-compose down || exit 0'
+                        }
+                    }
+            }
+
+    stage('Docker compose build') {
+                steps {
+                    if (isUnix){
+                        sh 'docker-compose up -d --build'
+                    }
+                    else {
+                        bat 'docker-compose up -d --build'
+                    }
+                }
+        }
+
     stage('Build Docker Image') {
             steps {
                         script {
