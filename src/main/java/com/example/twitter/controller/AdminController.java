@@ -30,6 +30,5 @@ public class AdminController {
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error assigning role: " + e.getMessage());
         }
-
     }
 }

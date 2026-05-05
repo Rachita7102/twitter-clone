@@ -1,10 +1,10 @@
 package com.example.twitter.service;
 
 import com.example.twitter.dao.*;
+import com.example.twitter.entity.User;
 import com.example.twitter.mapper.UserMapper;
 import com.example.twitter.repository.AuthRepository;
 import com.example.twitter.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

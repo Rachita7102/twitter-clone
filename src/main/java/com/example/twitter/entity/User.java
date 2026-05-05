@@ -1,4 +1,4 @@
-package com.example.twitter.dao;
+package com.example.twitter.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

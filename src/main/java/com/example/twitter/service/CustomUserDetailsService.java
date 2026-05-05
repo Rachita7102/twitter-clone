@@ -1,7 +1,7 @@
 package com.example.twitter.service;
 
 
-import com.example.twitter.dao.User;
+import com.example.twitter.entity.User;
 import com.example.twitter.repository.AuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
