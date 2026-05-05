@@ -26,8 +26,13 @@ public class AuthController {
         return ResponseEntity.ok(authService.loginUser(request));
     }
 
-    @GetMapping("/test")
-    public String test() {
+    @GetMapping("/admin")
+    public String testAdminRole() {
+        return "Authenticated endpoint accessed successfully!";
+    }
+
+    @GetMapping("/user")
+    public String testUserRole() {
         return "Authenticated endpoint accessed successfully!";
     }
 }
