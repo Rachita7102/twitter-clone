@@ -2,20 +2,18 @@ package com.example.twitter.service;
 
 import com.example.twitter.dao.TweetResponse;
 import com.example.twitter.entity.Tweet;
-import com.example.twitter.entity.User;
 import com.example.twitter.mapper.TweetMapper;
 import com.example.twitter.repository.TweetRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TweetService {
-    private TweetRepository tweetRepository;
-    private TweetMapper tweetMapper;
+    private final TweetRepository tweetRepository;
+    private final TweetMapper tweetMapper;
 
     public TweetService(TweetRepository tweetRepository,TweetMapper tweetMapper) {
         this.tweetRepository = tweetRepository;
