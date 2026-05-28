@@ -1,5 +1,6 @@
-package com.example.twitter.entity;
+package com.example.twitter.dao;
 
+import com.example.twitter.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,23 +9,15 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tweets")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Tweet {
+@AllArgsConstructor
+public class TweetResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String content;
-
     private LocalDateTime createdAt;
+    private String username;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id") // foreign key
-    private User user;
 }
