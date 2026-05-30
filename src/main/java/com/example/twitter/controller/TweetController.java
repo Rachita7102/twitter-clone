@@ -1,5 +1,6 @@
 package com.example.twitter.controller;
 
+import com.example.twitter.dao.CreateTweetDao;
 import com.example.twitter.dao.TweetResponse;
 import com.example.twitter.entity.Tweet;
 import com.example.twitter.entity.User;
@@ -21,8 +22,9 @@ public class TweetController {
         }
 
     @PostMapping
-    public ResponseEntity<TweetResponse> createTweet(@RequestBody Tweet tweet) {
-        return ResponseEntity.ok(tweetService.createTweet(tweet));
+    public ResponseEntity<TweetResponse> createTweet(@RequestBody CreateTweetDao tweet) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok(tweetService.createTweet(tweet,username));
     }
 
     @DeleteMapping("/{id}")
@@ -31,7 +33,7 @@ public class TweetController {
         return ResponseEntity.ok(tweetService.deleteTweet(id, username));
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<Page<TweetResponse>> getTweetsByUser(
             @PathVariable Long userId,
             @RequestParam(defaultValue = "0") int page,

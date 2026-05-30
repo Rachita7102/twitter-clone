@@ -11,5 +11,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateTweetDao {
     private String content;
-    private String username;
 }
