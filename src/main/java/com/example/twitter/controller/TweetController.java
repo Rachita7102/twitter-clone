@@ -29,8 +29,15 @@ public class TweetController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTweet(@PathVariable Long id) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return ResponseEntity.ok(tweetService.deleteTweet(id, username));
+
+        String username = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        tweetService.deleteTweet(id, username);
+
+        return ResponseEntity.ok("Tweet deleted successfully");
     }
 
     @GetMapping("/{userId}")

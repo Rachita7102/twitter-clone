@@ -4,6 +4,8 @@ import com.example.twitter.dao.CreateTweetDao;
 import com.example.twitter.dao.TweetResponse;
 import com.example.twitter.entity.Tweet;
 import com.example.twitter.entity.User;
+import com.example.twitter.exception.TweetNotFoundException;
+import com.example.twitter.exception.UnauthorizedTweetAccessException;
 import com.example.twitter.mapper.TweetMapper;
 import com.example.twitter.repository.TweetRepository;
 import org.springframework.data.domain.Page;
@@ -39,16 +41,17 @@ public class TweetService {
         return tweetMapper.toResponse(savedTweet);
     }
 
-    public String deleteTweet(Long id, String username) {
+    public void deleteTweet(Long id, String username) {
+
         Tweet tweet = tweetRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tweet not found with id: " + id));
+                .orElseThrow(() ->
+                        new TweetNotFoundException("Tweet not found with id: " + id));
 
         if (!tweet.getUser().getUsername().equals(username)) {
-            return "You are not authorized to delete this tweet.";
+            throw new UnauthorizedTweetAccessException("You are not authorized to delete this tweet");
         }
 
         tweetRepository.delete(tweet);
-        return "Tweet with id " + id + " deleted successfully.";
     }
 
     public Page<TweetResponse> getTweetsByUser(Long userId, int page, int size) {
