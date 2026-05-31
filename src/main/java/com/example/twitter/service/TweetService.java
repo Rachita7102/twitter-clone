@@ -59,4 +59,20 @@ public class TweetService {
         return tweetRepository.findAllByUserId(userId, pageable)
                 .map(tweetMapper::toResponse);
     }
+
+    public TweetResponse updateTweet(Long id, String username, CreateTweetDao updatedTweet) {
+        Tweet tweet = tweetRepository.findById(id)
+                .orElseThrow(() ->
+                        new TweetNotFoundException("Tweet not found with id: " + id));
+
+        if (!tweet.getUser().getUsername().equals(username)) {
+            throw new UnauthorizedTweetAccessException("You are not authorized to update this tweet");
+        }
+
+         tweet.setContent(updatedTweet.getContent());
+         tweet.setUpdatedAt(LocalDateTime.now());
+
+        tweetRepository.save(tweet);
+        return tweetMapper.toResponse(tweet);
+    }
 }

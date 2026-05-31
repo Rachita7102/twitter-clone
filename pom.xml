@@ -82,6 +82,14 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>4.0.5</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Jwt api -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

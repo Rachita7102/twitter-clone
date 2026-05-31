@@ -2,14 +2,12 @@ package com.example.twitter.controller;
 
 import com.example.twitter.dao.CreateTweetDao;
 import com.example.twitter.dao.TweetResponse;
-import com.example.twitter.entity.Tweet;
-import com.example.twitter.entity.User;
 import com.example.twitter.service.TweetService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/users/tweet")
@@ -22,7 +20,9 @@ public class TweetController {
         }
 
     @PostMapping
-    public ResponseEntity<TweetResponse> createTweet(@RequestBody CreateTweetDao tweet) {
+    public ResponseEntity<TweetResponse> createTweet(@Valid @RequestBody CreateTweetDao tweet) {
+        System.out.println("Received tweet content: " + tweet.getContent());
+
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return ResponseEntity.ok(tweetService.createTweet(tweet,username));
     }
@@ -39,6 +39,15 @@ public class TweetController {
 
         return ResponseEntity.ok("Tweet deleted successfully");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TweetResponse> updateTweet(@PathVariable Long id, @Valid @RequestBody CreateTweetDao updatedTweet) {
+        String username = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+        return ResponseEntity.ok(tweetService.updateTweet(id,username,updatedTweet));
+    };
 
     @GetMapping("/{userId}")
     public ResponseEntity<Page<TweetResponse>> getTweetsByUser(

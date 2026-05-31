@@ -24,6 +24,8 @@ public class Tweet {
 
     private LocalDateTime createdAt;
 
+    private  LocalDateTime updatedAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id") // foreign key
     private User user;
