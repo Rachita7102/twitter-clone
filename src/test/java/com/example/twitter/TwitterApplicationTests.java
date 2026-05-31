@@ -11,7 +11,6 @@ class TwitterApplicationTests {
 	@Test
 	void contextLoads() {
         System.out.println("Context loaded successfully!");
-        System.out.println("Running tests with 'test' profile active.");
 	}
 
 }
