@@ -11,6 +11,9 @@ class TwitterApplicationTests {
 	@Test
 	void contextLoads() {
         System.out.println("Context loaded successfully!");
+        System.out.println(
+            "Test profile is active: " + System.getProperty("spring.profiles.active")
+        );
 	}
 
 }
